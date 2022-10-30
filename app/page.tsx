@@ -12,7 +12,7 @@ export default async function Page() {
   console.log(todos);
   return (
     <main>
-      <Todos todos={todos} />
+      <Todos initialTodos={todos} />
     </main>
   );
 }
