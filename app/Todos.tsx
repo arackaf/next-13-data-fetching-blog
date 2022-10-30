@@ -8,14 +8,15 @@ export const Todos: FC<{ initialTodos: TodosResult }> = (props) => {
   const [filter, setFilter] = useState("");
 
   const { data: todos } = useQuery<TodosResult>(
-    ["todos"],
+    ["todos", filter],
     async () => {
-      const res = await fetch("api/todos");
+      const res = await fetch(`api/todos?filter=${filter}`);
       return res.json();
     },
     {
-      initialData: props.initialTodos,
+      initialData: () => (filter === "" ? props.initialTodos : undefined),
       staleTime: 5000,
+      keepPreviousData: true,
     }
   );
 
@@ -34,7 +35,7 @@ export const Todos: FC<{ initialTodos: TodosResult }> = (props) => {
         <option value="low">Low</option>
       </select>
       <ul>
-        {todos.data.map((todo, idx) => (
+        {todos!.data.map((todo, idx) => (
           <li key={idx}>
             {todo.name} - {todo.priority}
           </li>

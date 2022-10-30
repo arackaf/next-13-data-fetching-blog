@@ -9,7 +9,7 @@ export default async function Page() {
   const todosPromise = getTodos();
 
   const todos = await todosPromise;
-  console.log(todos);
+
   return (
     <main>
       <Todos initialTodos={todos} />
