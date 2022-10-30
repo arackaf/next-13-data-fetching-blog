@@ -1,10 +1,14 @@
 import "../styles/globals.css";
 
+import { ReactQueryRoot } from "./ReactQueryProvider";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <head></head>
-      <body>{children}</body>
+      <body>
+        <ReactQueryRoot>{children}</ReactQueryRoot>
+      </body>
     </html>
   );
 }
